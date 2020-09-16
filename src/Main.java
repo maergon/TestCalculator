@@ -13,8 +13,9 @@ public class Main {
 
         //получаем аргументы из строки
         String[] subStr = inputStringWithArgs.split(" ");
-        String[] numbers = new String[]{"I", "IV", "V", "IX", "X"};
+        String[] numbers = new String[]{"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
 
+        //TODO не работает вычисления с II и III
         //Римские цифры
         String rom_a = subStr[0];
         String rom_b = subStr[2];
@@ -30,7 +31,8 @@ public class Main {
             Service.performCalculations(
                     rom_operator,
                     Service.convertingToArabic(rom_a),
-                    Service.convertingToArabic(rom_b)
+                    Service.convertingToArabic(rom_b),
+                    true
             );
         } else {
             //Арабские цифры
@@ -41,7 +43,7 @@ public class Main {
             //задаем границы чисел для расчетов от 1 до 10
             if (a >= 1 && a <= 10 && b >= 1 && b <= 10) {
                 Utils.informationLine(String.valueOf(a), String.valueOf(b), operator);
-                Service.performCalculations(operator, a, b);
+                Service.performCalculations(operator, a, b, false);
             } else {
                 throw new Exception("Данные не соотвествуют формату в диапазоне от 1 до 10");
             }

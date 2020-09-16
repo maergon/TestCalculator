@@ -26,24 +26,66 @@ public class Service {
         return result;
     }
 
+    public static String arabicToRoman(int number) {
+        if ((number <= 0) || (number > 4000)) {
+            throw new IllegalArgumentException(number + " is not in range (0,4000]");
+        }
+
+        List<RomanNumeral> romanNumerals = RomanNumeral.getReverseSortedValues();
+
+        int i = 0;
+        StringBuilder sb = new StringBuilder();
+
+        while ((number > 0) && (i < romanNumerals.size())) {
+            RomanNumeral currentSymbol = romanNumerals.get(i);
+            if (currentSymbol.getValue() <= number) {
+                sb.append(currentSymbol.name());
+                number -= currentSymbol.getValue();
+            } else {
+                i++;
+            }
+        }
+
+        return sb.toString();
+    }
+
     //производим вычисления с полученными числами
-    static void performCalculations(String operator, int a, int b) throws Exception {
+    static void performCalculations(String operator, int a, int b, boolean isRom) throws Exception {
         System.out.print("Результат вычисления: ");
-        switch (operator) {
-            case "+":
-                System.out.println(a + b);
-                break;
-            case "-":
-                System.out.println(a - b);
-                break;
-            case "*":
-                System.out.println(a * b);
-                break;
-            case "/":
-                System.out.println(a / b);
-                break;
-            default:
-                throw new Exception("Неверно введены данные");
+        if (isRom){
+            switch (operator) {
+                case "+":
+                    System.out.println(arabicToRoman(a + b));
+                    break;
+                case "-":
+                    System.out.println(arabicToRoman(a - b));
+                    break;
+                case "*":
+                    System.out.println(arabicToRoman(a * b));
+                    break;
+                case "/":
+                    System.out.println(arabicToRoman(a / b));
+                    break;
+                default:
+                    throw new Exception("Неверно введены данные");
+            }
+        } else {
+            switch (operator) {
+                case "+":
+                    System.out.println(a + b);
+                    break;
+                case "-":
+                    System.out.println(a - b);
+                    break;
+                case "*":
+                    System.out.println(a * b);
+                    break;
+                case "/":
+                    System.out.println(a / b);
+                    break;
+                default:
+                    throw new Exception("Неверно введены данные");
+            }
         }
     }
 }

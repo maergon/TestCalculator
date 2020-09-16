@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum RomanNumeral {
-    I(1), IV(4), V(5), IX(9), X(10);
+    I(1), II(2), III(3), IV(4), V(5), IX(9), X(10);
 
     private final int value;
 
